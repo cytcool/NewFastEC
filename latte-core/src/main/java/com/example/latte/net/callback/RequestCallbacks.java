@@ -1,10 +1,10 @@
 package com.example.latte.net.callback;
 
-import com.example.latte.net.RestCreator;
 
-import java.util.WeakHashMap;
+import android.os.Handler;
 
-import okhttp3.RequestBody;
+import com.example.latte.ui.LatteLoader;
+import com.example.latte.ui.LoaderStyle;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,12 +19,15 @@ public class RequestCallbacks implements Callback<String> {
     private final ISuccess SUCCESS;
     private final IError ERROR;
     private final IFailure FAILURE;
+    private final LoaderStyle LOADER_STYLE;
+    private static final Handler HANDLER = new Handler();
 
-    public RequestCallbacks(IRequest request, ISuccess success, IError error, IFailure failure) {
+    public RequestCallbacks(IRequest request, ISuccess success, IError error, IFailure failure,LoaderStyle loaderStyle) {
         this.REQUEST = request;
         this.SUCCESS = success;
         this.ERROR = error;
         this.FAILURE = failure;
+        this.LOADER_STYLE = loaderStyle;
     }
 
     @Override
@@ -40,6 +43,7 @@ public class RequestCallbacks implements Callback<String> {
                 ERROR.onError(response.code(),response.message());
             }
         }
+        stopLoading();
     }
 
     @Override
@@ -50,6 +54,18 @@ public class RequestCallbacks implements Callback<String> {
 
         if (REQUEST!=null){
             REQUEST.onRequestEnd();
+        }
+        stopLoading();
+    }
+
+    private void stopLoading(){
+        if (LOADER_STYLE!=null){
+            HANDLER.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    LatteLoader.stopLoading();
+                }
+            },1000);
         }
     }
 }
