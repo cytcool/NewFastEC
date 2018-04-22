@@ -4,6 +4,7 @@ import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -39,14 +40,14 @@ public interface RestService {
     Call<String> put(@Url String url,@FieldMap Map<String,Object> params);
 
     @PUT
-    Call<String> putRaw(@Url String url, @Body RequestBody body);
+    Call<String> putRaw(@Url String url, @Body ResponseBody body);
 
     @DELETE
     Call<String> delete(@Url String url,@QueryMap Map<String,Object> params);
 
     @Streaming
     @GET
-    Call<RequestBody> download(@Url String url,@QueryMap Map<String,Object> params);
+    Call<ResponseBody> download(@Url String url,@QueryMap Map<String,Object> params);
 
     @Multipart
     @POST
