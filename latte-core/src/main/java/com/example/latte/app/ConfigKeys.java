@@ -5,9 +5,11 @@ package com.example.latte.app;
  * Created by CYT on 2018/4/18.
  */
 
-public enum ConfigType {
+public enum ConfigKeys {
     API_HOST,
-    APPLICATTION_CONTEXT,
+    APPLICATION_CONTEXT,
     CONFIG_READY,
-    ICON
+    ICON,
+    LOADER_DELAYED,
+    INTERCEPTOR
 }

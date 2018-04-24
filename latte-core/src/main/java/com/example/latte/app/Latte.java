@@ -1,9 +1,9 @@
 package com.example.latte.app;
 
 import android.content.Context;
+import android.os.Handler;
 
 import java.util.HashMap;
-import java.util.WeakHashMap;
 
 /**
  * 工具类
@@ -13,16 +13,22 @@ import java.util.WeakHashMap;
 
 public final class Latte {
 
-    public static Configurator init(Context context){
-        getConfigurations().put(ConfigType.APPLICATTION_CONTEXT.name(),context.getApplicationContext());
+    public static Configurator init(Context context) {
+        Configurator.getInstance()
+                .getLatteConfigs()
+                .put(ConfigKeys.APPLICATION_CONTEXT, context.getApplicationContext());
         return Configurator.getInstance();
     }
 
-    public static HashMap<String,Object> getConfigurations(){
-        return Configurator.getInstance().getLatteConfigs();
+    public static Configurator getConfigurator() {
+        return Configurator.getInstance();
     }
 
-    public static Context getApplicationContext(){
-        return (Context) getConfigurations().get(ConfigType.APPLICATTION_CONTEXT.name());
+    public static <T> T getConfiguration(Object key) {
+        return getConfigurator().getConfiguration(key);
+    }
+
+    public static Context getApplicationContext() {
+        return getConfiguration(ConfigKeys.APPLICATION_CONTEXT);
     }
 }
