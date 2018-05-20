@@ -22,7 +22,7 @@ public class SignHandler {
         final String address = profileJson.getString("address");
 
         final UserProfile profile = new UserProfile(useId,name,avatar,gender,address);
-        DatabaseManager.getInstance().getDao().insert(profile);
+        DatabaseManager.getInstance().getDao().insertOrReplace(profile);
 
         //已经注册并登录成功了
         AccountManager.setSignState();
@@ -38,7 +38,7 @@ public class SignHandler {
         final String address = profileJson.getString("address");
 
         final UserProfile profile = new UserProfile(useId,name,avatar,gender,address);
-        DatabaseManager.getInstance().getDao().insert(profile);
+        DatabaseManager.getInstance().getDao().insertOrReplace(profile);
 
         //已经注册并登录成功了
         AccountManager.setSignState();

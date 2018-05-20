@@ -28,7 +28,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new SignUpDelegate();
+        return new LauncherDelegate();
     }
 
 
