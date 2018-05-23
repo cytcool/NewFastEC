@@ -37,7 +37,7 @@ public class LatteProcessor extends AbstractProcessor {
         return types;
     }
 
-    private Set<Class<? extends Annotation>> getSupportedAnnotations(){
+    private Set<Class<? extends Annotation>> getSupportedAnnotations() {
         final Set<Class<? extends Annotation>> annotation = new LinkedHashSet<>();
         annotation.add(EntryGenerator.class);
         annotation.add(PayEntryGenerator.class);
@@ -47,29 +47,43 @@ public class LatteProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
-
-        return false;
+        generateEntryCode(roundEnvironment);
+        generatePayEntryCode(roundEnvironment);
+        generateAppRegisterCode(roundEnvironment);
+        return true;
     }
 
     private void scan(RoundEnvironment env,
                       Class<? extends Annotation> annotation,
-                      AnnotationValueVisitor visitor){
-        for (Element typeElement : env.getElementsAnnotatedWith(annotation)){
+                      AnnotationValueVisitor visitor) {
+        for (Element typeElement : env.getElementsAnnotatedWith(annotation)) {
             final List<? extends AnnotationMirror> annotationMirrors = typeElement.getAnnotationMirrors();
 
-            for (AnnotationMirror annotationMirror : annotationMirrors){
+            for (AnnotationMirror annotationMirror : annotationMirrors) {
                 final Map<? extends ExecutableElement, ? extends AnnotationValue> elementValue
                         = annotationMirror.getElementValues();
 
-                for (Map.Entry<? extends ExecutableElement,? extends AnnotationValue> entry
-                        : elementValue.entrySet()){
-                    entry.getValue().accept(visitor,null);
+                for (Map.Entry<? extends ExecutableElement, ? extends AnnotationValue> entry
+                        : elementValue.entrySet()) {
+                    entry.getValue().accept(visitor, null);
                 }
             }
         }
     }
 
-    private void generateEntryCode(RoundEnvironment env){
-
+    private void generateEntryCode(RoundEnvironment env) {
+        final EntryVisitor entryVisitor = new EntryVisitor();
+        entryVisitor.setFilter(processingEnv.getFiler());
+        scan(env, EntryGenerator.class, entryVisitor);
+    }
+    private void generatePayEntryCode(RoundEnvironment env) {
+        final PayEntryVisitor payEntryVisitor = new PayEntryVisitor();
+        payEntryVisitor.setFilter( processingEnv.getFiler());
+        scan(env, PayEntryGenerator.class, payEntryVisitor);
+    }
+    private void generateAppRegisterCode(RoundEnvironment env) {
+        final AppRegisterVisitor appRegisterVisitor = new AppRegisterVisitor();
+        appRegisterVisitor.setFilter(processingEnv.getFiler());
+        scan(env, AppRegisterGenerator.class, appRegisterVisitor);
     }
 }
