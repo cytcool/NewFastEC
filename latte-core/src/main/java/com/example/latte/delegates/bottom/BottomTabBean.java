@@ -10,11 +10,11 @@ public final class BottomTabBean {
         this.TITLE = title;
     }
 
-    public CharSequence getICON() {
+    public CharSequence getIcon() {
         return ICON;
     }
 
-    public CharSequence getTITLE() {
+    public CharSequence getTitle() {
         return TITLE;
     }
 }
