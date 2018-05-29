@@ -1,5 +1,6 @@
 package com.example.latte.ec.main.index;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,6 +12,7 @@ import android.view.View;
 import com.example.latte.delegates.bottom.BottomItemDelegate;
 import com.example.latte.ec.R;
 import com.example.latte.ec.R2;
+import com.example.latte.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import butterknife.BindView;
@@ -28,14 +30,33 @@ public class IndexDelegate extends BottomItemDelegate {
     @BindView(R2.id.et_search_view)
     AppCompatEditText mSearchView = null;
 
+    private RefreshHandler mRefreshHandler = null;
+
+    @Override
+    public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
+        mRefreshHandler = new RefreshHandler(mRefreshLayout);
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private void initRefreshLayout(){
+        mRefreshLayout.setColorSchemeColors(
+                android.R.color.holo_blue_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+        );
+        mRefreshLayout.setProgressViewOffset(true,120,300);
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        initRefreshLayout();
+    }
 
     @Override
     public Object setLayout() {
         return R.layout.delegate_index;
     }
 
-    @Override
-    public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
 
-    }
 }
