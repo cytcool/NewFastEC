@@ -64,4 +64,5 @@ dependencies {
     compile 'com.orhanobut:logger:2.1.1'
     //微信接入
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:+'
 }
