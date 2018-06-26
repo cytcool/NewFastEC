@@ -3,7 +3,6 @@ package com.example.cyt.newfastec;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.latte.delegates.LatteDelegate;
 import com.example.latte.net.RestClient;

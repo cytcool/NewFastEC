@@ -27,7 +27,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -40,12 +39,9 @@ dependencies {
     //字体图标
     implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
     implementation 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
-    //Fragment
-    implementation 'me.yokeyword:fragmentation:1.3.3'
-    implementation 'me.yokeyword:fragmentation-swipeback:1.3.3'
     //ButterKnife
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //网络请求依赖
     implementation 'com.squareup.okio:okio:1.13.0'
     implementation 'com.squareup.okhttp3:okhttp:3.8.1'
@@ -69,6 +65,8 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
-
+    //Fragment依赖
+    compile 'me.yokeyword:fragmentation:1.3.3'
+    compile 'me.yokeyword:fragmentation-swipeback:1.3.3'
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
 }

@@ -4,9 +4,7 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.logging.Filter;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Modifier;
